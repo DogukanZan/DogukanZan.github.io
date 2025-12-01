@@ -1,10 +1,11 @@
-name: Build and Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
       - main
       - master
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -25,8 +26,11 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' # Bu tema icin en kararli surum
-          bundler-cache: false # Onbellek hatasini engellemek icin kapattik
+          ruby-version: '3.1' 
+          bundler-cache: true
+
+      - name: Install ImageMagick (Gerekli Parca)
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
