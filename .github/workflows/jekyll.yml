@@ -23,13 +23,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # --- YENI EKLENEN KISIM (Python Kurulumu) ---
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install Jupyter
+        run: pip install jupyter
+      # -------------------------------------------
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.1' 
+          ruby-version: '3.1'
           bundler-cache: true
 
-      - name: Install ImageMagick (Gerekli Parca)
+      - name: Install ImageMagick
         run: sudo apt-get update && sudo apt-get install -y imagemagick
 
       - name: Setup Pages
